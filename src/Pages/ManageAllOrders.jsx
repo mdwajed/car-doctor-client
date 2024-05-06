@@ -1,19 +1,16 @@
-import group1 from "../assets/images/checkout/Group 160.png";
-import group2 from "../assets/images/checkout/Group 163 (1).png";
 import { ImCross } from "react-icons/im";
 import img from "../assets/images/checkout/checkout.png";
+import { SlArrowDown } from "react-icons/sl";
 import {
   Card,
   Typography,
   CardBody,
   IconButton,
-  CardFooter,
 } from "@material-tailwind/react";
 import { useContext, useEffect, useState } from "react";
 import { AuthContex } from "../Provider/AuthProvider";
-import axios from "axios";
 const TABLE_HEAD = ["", "Image", "Service", "Email", "Price", "Date", ""];
-const CartDetails = () => {
+const ManageAllOrders = () => {
   const { user } = useContext(AuthContex);
   const [checkout, setCheckout] = useState([]);
   const handleDelete = (id) => {
@@ -36,14 +33,11 @@ const CartDetails = () => {
 
   const url = `http://localhost:5000/checkout?email=${user?.email}`;
   useEffect(() => {
-    axios.get(url, { withCredentials: true }).then((res) => {
-      setCheckout(res.data);
-    });
-    // fetch(url)
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     setCheckout(data);
-    //   });
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        setCheckout(data);
+      });
   }, [url]);
   return (
     <Card className="h-full w-full my-6 shadow-none">
@@ -54,7 +48,7 @@ const CartDetails = () => {
         <div className="text-2xl md:text-5xl text-white font-bold absolute top-1/2 left-24">
           <p>Cart Details</p>
           <p className=" text-xs md:text-xl text-[#FF3811] ">
-            Home-Products Details
+            Home - Products Details
           </p>
         </div>
         <img className="w-full h-full sm:p-4" src={img} alt="" />
@@ -86,7 +80,7 @@ const CartDetails = () => {
                         variant="text"
                         className="bg-[#444444]"
                       >
-                        <ImCross className=" rounded-full w-4 h-4 text-white"></ImCross>
+                        <ImCross className=" rounded-full w-3 h-3 text-white"></ImCross>
                       </IconButton>
                     </td>
                     <td className={classes}>
@@ -140,8 +134,9 @@ const CartDetails = () => {
                     </td>
 
                     <td className={classes}>
-                      <p className="text-white bg-[#FF3811] p-1 md:w-20 rounded-lg text-center">
-                        Pending
+                      <p className="flex items-center gap-2 text-green-800 border border-green-800 p-1 md:w-24 rounded-lg text-center">
+                        <span>Approved</span>{" "}
+                        <SlArrowDown className="text-green-800  "></SlArrowDown>
                       </p>
                     </td>
                   </tr>
@@ -151,18 +146,8 @@ const CartDetails = () => {
           </tbody>
         </table>
       </CardBody>
-      <CardFooter className="flex items-center justify-between p-4 mb-4">
-        <div className="font-normal flex gap-4 ml-10">
-          <img src={group1} alt="" />
-          <p>Continue Shopping</p>
-        </div>
-        <div className="flex  gap-4 md:mr-20">
-          <img src={group2} alt="" />
-          <h2>Clear Shopping Cart</h2>
-        </div>
-      </CardFooter>
     </Card>
   );
 };
 
-export default CartDetails;
+export default ManageAllOrders;

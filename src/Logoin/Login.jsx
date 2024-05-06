@@ -6,6 +6,7 @@ import { FaLinkedinIn } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { useContext } from "react";
 import { AuthContex } from "../Provider/AuthProvider";
+import axios from "axios";
 const Login = () => {
   const { signin } = useContext(AuthContex);
   const hahdleLogin = (event) => {
@@ -14,10 +15,19 @@ const Login = () => {
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
+
     signin(email, password)
       .then((result) => {
-        console.log(result.user);
+        const loggedInUser = result.user;
+        console.log(loggedInUser);
+        const user = { email };
+        // navigate(location?.state? location?.state : '/')
+        //get access token
+        axios
+          .post("http://localhost:5000/jwt", user, { withCredentials: true })
+          .then((res) => {
+            console.log(res.data);
+          });
       })
       .catch((error) => {
         console.log(error);

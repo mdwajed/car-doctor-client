@@ -1,9 +1,11 @@
 import { useContext } from "react";
 import { AuthContex } from "../Provider/AuthProvider";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { Progress } from "@material-tailwind/react";
 const PrivateRoute = ({ children }) => {
   const { user,loading } = useContext(AuthContex);
+  const location=useLocation()
+  console.log(location)
   if(loading){
     return    <Progress
     value={50}
