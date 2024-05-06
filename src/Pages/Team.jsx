@@ -17,7 +17,7 @@ import {
 
 const Team = () => {
   return (
-  <div className="flex items-center relative my-24">
+  <div className="flex items-center relative my-12">
          <FaArrowLeft className="absolute top-1/2 transform -translate-y-1/2 bg-gray-600 rounded-full text-4xl left-1 z-10 p-2" />
       <FaArrowRight className="absolute top-1/2 transform -translate-y-1/2 bg-[#FF3811] rounded-full text-4xl right-1 z-10 p-2" />
    <div>

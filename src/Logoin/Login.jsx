@@ -34,7 +34,7 @@ const Login = () => {
         </Typography>
 
         <form
-          onClick={hahdleLogin}
+          onSubmit={hahdleLogin}
           className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
         >
           <div className="mb-1 flex flex-col gap-6">
@@ -44,6 +44,7 @@ const Login = () => {
             <Input
               size="lg"
               name="email"
+              type="email"
               placeholder="name@mail.com"
               className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
               labelProps={{
@@ -65,9 +66,10 @@ const Login = () => {
             />
           </div>
 
-          <Button className="mt-6 bg-[#FF3811]" fullWidth>
-            sign In
+          <Button type="submit" className="mt-6 bg-[#FF3811]" fullWidth>
+            Log In
           </Button>
+
           <Typography
             variant="h6"
             color="blue-gray"

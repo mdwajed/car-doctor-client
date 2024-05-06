@@ -1,5 +1,5 @@
 import logo from "../../assets/logo.svg";
-import React from "react";
+import React, { useContext } from "react";
 import { FiSearch } from "react-icons/fi";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import {
@@ -8,9 +8,11 @@ import {
   Typography,
   Button,
 } from "@material-tailwind/react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { AuthContex } from "../../Provider/AuthProvider";
 
 const Nabvar = () => {
+  const { user, logOut } = useContext(AuthContex);
   const [openNav, setOpenNav] = React.useState(false);
 
   React.useEffect(() => {
@@ -19,6 +21,13 @@ const Nabvar = () => {
       () => window.innerWidth >= 960 && setOpenNav(false)
     );
   }, []);
+  const handleLogout = async () => {
+    try {
+      await logOut();
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
+  };
 
   const navList = (
     <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
@@ -29,7 +38,7 @@ const Nabvar = () => {
         className="flex items-center gap-x-2 p-1 font-medium text-lg"
       >
         <NavLink to="/" className="flex items-center">
-         Home
+          Home
         </NavLink>
       </Typography>
       <Typography
@@ -39,7 +48,7 @@ const Nabvar = () => {
         className="flex items-center gap-x-2 p-1 font-medium text-lg"
       >
         <NavLink to="/about" className="flex items-center">
-         About
+          About
         </NavLink>
       </Typography>
       <Typography
@@ -49,7 +58,7 @@ const Nabvar = () => {
         className="flex items-center gap-x-2 p-1 font-medium text-lg"
       >
         <NavLink to="/service" className="flex items-center">
-         Service
+          Service
         </NavLink>
       </Typography>
       <Typography
@@ -59,7 +68,7 @@ const Nabvar = () => {
         className="flex items-center gap-x-2 p-1 font-medium text-lg"
       >
         <NavLink to="/blog" className="flex items-center">
-         Blog
+          Blog
         </NavLink>
       </Typography>
       <Typography
@@ -69,9 +78,24 @@ const Nabvar = () => {
         className="flex items-center gap-x-2 p-1 font-medium text-lg"
       >
         <NavLink to="/contact" className="flex items-center">
-         Contact
+          Contact
         </NavLink>
       </Typography>
+      {user?.email ? (
+        <Button
+          onClick={handleLogout}
+          className="bg-gradient-to-r from-blue-500 to-purple-300"
+        >
+          Logout
+        </Button>
+      ) : (
+          <Link to="/login">
+            <Button className="bg-gradient-to-r from-blue-500 to-purple-300">
+              Login
+            </Button>
+          </Link>
+       
+      )}
     </ul>
   );
 
@@ -89,56 +113,14 @@ const Nabvar = () => {
           </div>
           <Button
             variant="outlined"
-            className="text-[#FF3811] border border-[#FF3811] text-base"
+            className="text-[#FF3811] border border-[#FF3811] text-base capitalize"
           >
             Appointment
           </Button>
         </div>
-        {/* <IconButton
-          variant="text"
-          className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
-          ripple={false}
-          onClick={() => setOpenNav(!openNav)}
-        >
-          {openNav ? (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              className="h-6 w-6"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          ) : (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          )}
-        </IconButton> */}
       </div>
       <MobileNav open={openNav}>
-        <div className="container mx-auto">
-          {navList}
-          <div className="flex items-center gap-x-1">
-            <Button variant="outlined">Appointment</Button>
-          </div>
-        </div>
+        <div className="container mx-auto">{navList}</div>
       </MobileNav>
     </Navbar>
   );

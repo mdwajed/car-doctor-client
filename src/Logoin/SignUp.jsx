@@ -35,7 +35,7 @@ const SignUp = () => {
         <Typography variant="h3" color="blue-gray" className="text-center">
           Sign Up
         </Typography>
-
+{/* Wn5C1XLrsjockRwt */}
         <form
           onSubmit={hahdleSignUp}
           className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"

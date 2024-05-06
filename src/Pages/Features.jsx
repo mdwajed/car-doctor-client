@@ -13,7 +13,7 @@ import {
 
 const Features = () => {
     return (
-        <div className="my-24">
+        <div className="my-12">
         <div className="text-center mb-8 space-y-4">
           <p className="text-[#FF3811] text xl font-bold">Core Features</p>
           <h2 className="text-5xl font-bold">Why Choose Us</h2>

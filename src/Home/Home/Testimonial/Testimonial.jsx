@@ -5,7 +5,7 @@ import { IoStar } from "react-icons/io5";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 const Testimonial = () => {
   return (
-    <div className="my-24 relative">
+    <div className="my-12 relative">
       <FaArrowLeft className="absolute top-1/2 transform -translate-y-1/2 bg-gray-600 rounded-full text-4xl  z-10 p-2" />
       <FaArrowRight className="absolute top-1/2 transform -translate-y-1/2 bg-[#FF3811] rounded-full text-4xl right-1 z-10 p-2" />
       <div className="text-center mb-2 space-y-4">

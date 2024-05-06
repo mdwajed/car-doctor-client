@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 
 const AboutUs = () => {
   return (
-    <Card className="w-full  flex-row h-[550px] mt-12 shadow-none gap-12 my-24">
+    <Card className="w-full  flex-row h-[550px] shadow-none md:gap-24 my-12 ">
       <CardHeader
         shadow={false}
         floated={false}
