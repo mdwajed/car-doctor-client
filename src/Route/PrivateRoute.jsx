@@ -5,7 +5,7 @@ import { Progress } from "@material-tailwind/react";
 const PrivateRoute = ({ children }) => {
   const { user,loading } = useContext(AuthContex);
   const location=useLocation()
-  console.log(location)
+  console.log(location.pathname)
   if(loading){
     return    <Progress
     value={50}
@@ -16,7 +16,7 @@ const PrivateRoute = ({ children }) => {
   if (user?.email) {
     return children;
   }
-  return <Navigate to="/login" replace></Navigate>;
+  return <Navigate state={location.pathname} to="/login" replace></Navigate>;
 };
 
 export default PrivateRoute;

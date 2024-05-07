@@ -1,14 +1,17 @@
 import { Card, Input, Button, Typography } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import login from "../../src/assets/images/login/login.svg";
 import { FaFacebookF } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { useContext } from "react";
 import { AuthContex } from "../Provider/AuthProvider";
-import axios from "axios";
+import  axios  from "axios";
 const Login = () => {
   const { signin } = useContext(AuthContex);
+  const location = useLocation();
+  const navigate = useNavigate();
+  console.log(location);
   const hahdleLogin = (event) => {
     event.preventDefault();
     console.log("wajed");
@@ -21,12 +24,13 @@ const Login = () => {
         const loggedInUser = result.user;
         console.log(loggedInUser);
         const user = { email };
-        // navigate(location?.state? location?.state : '/')
+
         //get access token
         axios
           .post("http://localhost:5000/jwt", user, { withCredentials: true })
           .then((res) => {
             console.log(res.data);
+            navigate(location?.state ? location?.state : "/");
           });
       })
       .catch((error) => {

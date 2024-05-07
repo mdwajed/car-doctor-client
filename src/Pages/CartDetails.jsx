@@ -39,11 +39,6 @@ const CartDetails = () => {
     axios.get(url, { withCredentials: true }).then((res) => {
       setCheckout(res.data);
     });
-    // fetch(url)
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     setCheckout(data);
-    //   });
   }, [url]);
   return (
     <Card className="h-full w-full my-6 shadow-none">
